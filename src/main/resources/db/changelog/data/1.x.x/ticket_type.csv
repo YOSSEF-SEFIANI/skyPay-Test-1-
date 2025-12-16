@@ -1,0 +1,28 @@
+id,code,value,description,display_order,resolution_time,assignment_time,category,company
+1,TECH,Technical Issue,Support request - technical issue,1,86400,3600,1,NULL
+2,PAY,Question about Pay,Support request - question about payment,2,86400,3600,1,NULL
+3,PACK,Change Pack,Support request - change my pack,3,86400,3600,1,NULL
+4,EVAL,Issue with Evaluation,Support request - issue with evaluation,4,86400,3600,1,NULL
+5,ORGA,Organize Activity,Support request - let another organize activity,5,86400,3600,1,NULL
+6,PART,Become Partner,Support request - become a partner,6,86400,3600,1,NULL
+7,REPORT,Make Report,Support request - make a report,7,86400,3600,1,NULL
+8,IMPROV,Propose Improvement,Support request - propose an improvement,8,86400,3600,1,NULL
+9,DELETE,Delete Account,Support request - cannot delete account,9,86400,3600,1,NULL
+10,SR_OTHER,Other,Support request - something else,10,86400,3600,1,NULL
+11,FAKE,Fake Profile,User report - fake profile,1,172800,7200,2,NULL
+12,DISGUISE,Disguised Professional,User report - professional disguised as individual,2,172800,7200,2,NULL
+13,UR_DUP,Duplicate Activity,User report - duplicate activity or SPAM,3,172800,7200,2,NULL
+14,UR_DIST,Disturbing Description,User report - disturbing description or comments,4,172800,7200,2,NULL
+15,ABSENT,Frequently Absent,User report - frequently absent profile,5,172800,7200,2,NULL
+16,ANNOY,Annoying Profile,User report - annoying profile,6,172800,7200,2,NULL
+17,UR_OTHER,Other,User report - other,7,172800,7200,2,NULL
+18,THRESHOLD,Threshold Exceeded,User report - threshold exceeded,8,172800,7200,2,NULL
+19,COM_ACT,Disguised Commercial Activity,Event report - disguised commercial activity,1,259200,10800,3,NULL
+20,ILLEGAL,Illegal Activity,Event report - illegal activity,2,259200,10800,3,NULL
+21,ER_DIST,Disturbing Activity,Event report - disturbing activity,3,259200,10800,3,NULL
+22,ER_DUP,Duplicate Activity,Event report - duplicate activity or SPAM,4,259200,10800,3,NULL
+23,DISPUTE,Dispute,Event report - dispute,5,259200,10800,3,NULL
+24,ER_OTHER,Other,Event report - other,6,259200,10800,3,NULL
+25,CONTEST,Contest Activity Presence,Event report - contest activity presence,7,259200,10800,3,NULL
+26,HARASS,Harassment Complaint,Complaint report - harassment,1,432000,14400,4,NULL
+27,SCAM,Scam Complaint,Complaint report - scam,2,432000,14400,4,NULL

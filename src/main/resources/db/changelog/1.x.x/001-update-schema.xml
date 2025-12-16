@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!--revinfo-->
+    <changeSet author="zhi" id="001-update-schema-001">
+        <createTable tableName="revinfo">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="revinfoPK"/>
+            </column>
+            <column defaultValue="system" name="editor" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev_timestamp" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- category -->
+    <changeSet author="sfy" id="001-update-schema-002">
+        <createTable tableName="category" remarks="This class represents the different categories of tickets.">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="categoryPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="archived" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company" type="VARCHAR(36)"/>
+            <column name="description" type="TEXT"/>
+            <column name="display_order" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(100)"/>
+            <column name="code" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="assignment_time" type="BIGINT"
+                    remarks="The time in seconds between ticket creation and complete resolution"/>
+            <column name="resolution_time" type="BIGINT"
+                    remarks="The time in seconds between ticket creation and the start of its handling by the support time."/>
+        </createTable>
+    </changeSet>
+
+    <!--ticket_type-->
+    <changeSet author="sfy" id="001-update-schema-003">
+        <createTable tableName="ticket_type" remarks="This class represents the different types of tickets.">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ticket_typePK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="archived" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company" type="VARCHAR(36)"/>
+            <column name="description" type="TEXT"/>
+            <column name="display_order" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(100)"/>
+            <column name="code" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="assignment_time" type="BIGINT"
+                    remarks="he time in seconds between ticket creation and complete resolution."/>
+            <column name="resolution_time" type="BIGINT"
+                    remarks="The time in seconds between ticket creation and the start of its handling by the support time."/>
+            <column name="category" type="BIGINT">
+                <constraints foreignKeyName="fk_category_ticket_type" references="category(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--channel-->
+    <changeSet author="sfy" id="001-update-schema-004">
+        <createTable tableName="channel">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="channelPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="archived" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company" type="VARCHAR(36)"/>
+            <column name="description" type="TEXT"/>
+            <column name="display_order" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(100)"/>
+            <column name="code" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--link_part-->
+    <changeSet author="sfy" id="001-update-schema-005">
+        <createTable tableName="link_part" remarks="This class represents the different parts of a link.">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="link_partPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="archived" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company" type="VARCHAR(36)"/>
+            <column name="description" type="TEXT"/>
+            <column name="display_order" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(100)"/>
+            <column name="code" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--link_type-->
+    <changeSet author="sfy" id="001-update-schema-006">
+        <createTable tableName="link_type">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="link_typePK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company" type="VARCHAR(100)"/>
+            <column name="source" type="BIGINT">
+                <constraints foreignKeyName="fk_source_link_type" references="link_part(id)"/>
+            </column>
+            <column name="target" type="BIGINT">
+                <constraints foreignKeyName="fk_target_link_type" references="link_part(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--device-->
+    <changeSet author="sfy" id="001-update-schema-007">
+        <createTable tableName="device">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="devicePK"/>
+            </column>
+            <column name="brand" type="VARCHAR(100)"/>
+            <column name="memory" type="VARCHAR(60)"/>
+            <column name="model" type="VARCHAR(100)"/>
+            <column name="os" type="VARCHAR(60)"/>
+            <column name="os_version" type="VARCHAR(60)"/>
+        </createTable>
+    </changeSet>
+
+    <!--ticket-->
+    <changeSet author="sfy" id="001-update-schema-008">
+        <createTable tableName="ticket">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ticketPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="application_version" type="VARCHAR(60)"/>
+            <column name="assigned_team" type="VARCHAR(100)"/>
+            <column name="assigned_to" type="VARCHAR(60)"/>
+            <column name="attachments" type="JSONB"/>
+            <column name="company" type="VARCHAR(100)"/>
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="effective_assignment_time" type="BIGINT"/>
+            <column name="effective_resolution_time" type="BIGINT"/>
+            <column name="forecasted_assignment_time" type="BIGINT"/>
+            <column name="forecasted_resolution_time" type="BIGINT"/>
+            <column name="metadata" type="JSONB"/>
+            <column name="priority" type="INTEGER" defaultValueNumeric="3">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resolution" type="TEXT"/>
+            <column name="status" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="suspended" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tags" type="JSONB"/>
+            <column name="title" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="channel" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_channel_ticket" references="channel(id)"/>
+            </column>
+            <column name="device" type="BIGINT">
+                <constraints foreignKeyName="fk_device_ticket" references="device(id)"/>
+            </column>
+            <column name="ticket_type" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_ticket_type_ticket" references="ticket_type(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--feedback-->
+    <changeSet author="sfy" id="001-update-schema-009">
+        <createTable tableName="feedback">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="feedbackPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" type="TEXT"/>
+            <column name="rating" type="INTEGER"/>
+            <column name="ticket" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="fk_ticket_feedback" references="ticket(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--ticket_link-->
+    <changeSet author="sfy" id="001-update-schema-010">
+        <createTable tableName="ticket_link">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ticket_linkPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="source" type="VARCHAR(36)">
+                <constraints foreignKeyName="fk_source_ticket_link" references="ticket(id)"/>
+            </column>
+            <column name="target" type="VARCHAR(36)">
+                <constraints foreignKeyName="fk_target_ticket_link" references="ticket(id)"/>
+            </column>
+            <column name="link_type" type="BIGINT">
+                <constraints foreignKeyName="fk_link_type_ticket_link" references="link_type(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="jme" id="001-update-schema-011">
+        <sql>
+            <![CDATA[
+        -- Ajout des colonnes générées pour l’unicité des types de relations
+        ALTER TABLE link_type
+        ADD COLUMN ordered_source INTEGER GENERATED ALWAYS AS (LEAST(source, target)) STORED,
+        ADD COLUMN ordered_target INTEGER GENERATED ALWAYS AS (GREATEST(source, target)) STORED;
+
+        -- Contrainte d’unicité
+        ALTER TABLE link_type
+        ADD CONSTRAINT unique_ticket_link UNIQUE (ordered_source, ordered_target);
+        ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet author="jme" id="001-update-schema-012">
+        <sql>
+            <![CDATA[
+        -- Ajout des colonnes générées pour les relations symétriques
+        ALTER TABLE ticket_link
+        ADD COLUMN ordered_source VARCHAR(36) GENERATED ALWAYS AS (LEAST(source, target)) STORED,
+        ADD COLUMN ordered_target VARCHAR(36) GENERATED ALWAYS AS (GREATEST(source, target)) STORED;
+
+        -- Contrainte d’unicité
+        ALTER TABLE ticket_link
+        ADD CONSTRAINT unique_symmetric_ticket_relation UNIQUE (ordered_source, ordered_target, link_type);
+        ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet author="jme" id="001-update-schema-013">
+        <sql>
+            <![CDATA[
+                -- Ajout de la contrainte d'unicité pour assurer qu'un ticket ne peut avoir qu'un seul parent
+                CREATE UNIQUE INDEX unique_target_for_parent_child ON ticket_link (target, link_type)
+                WHERE link_type = 1;
+
+                -- Ajout de la contrainte pour éviter qu'un ticket ait une relation avec lui-même
+                ALTER TABLE ticket_link
+                ADD CONSTRAINT no_self_link CHECK (source <> target);
+            ]]>
+        </sql>
+    </changeSet>
+    <!--discussion_comment-->
+    <changeSet author="cga" id="001-update-schema-014">
+        <createTable tableName="discussion_comment">
+            <column autoIncrement="true" name="id" type="BIGINT" startWith="10000">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="discussion_commentPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="attachments" type="JSONB"/>
+            <column name="content" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mentions" type="JSONB"/>
+            <column name="metadata" type="JSONB"/>
+            <column name="object_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="object_type" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent" type="BIGINT">
+                <constraints foreignKeyName="fk_discussion_comment_discussion_comment"
+                             references="discussion_comment(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <!--discussion_reaction-->
+    <changeSet author="cga" id="001-update-schema-015">
+        <createTable tableName="discussion_reaction">
+            <column autoIncrement="true" name="id" type="BIGINT" startWith="10000">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="discussion_reactionPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment" type="BIGINT">
+                <constraints foreignKeyName="fk_discussion_comment_discussion_reaction"
+                             references="discussion_comment(id)" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <!--faq_category-->
+    <changeSet author="jme" id="001-update-schema-016">
+        <createTable tableName="faq_category">
+            <column autoIncrement="true" name="id" type="BIGINT" startWith="10000">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="faq_categoryPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="archived" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company" type="VARCHAR(36)"/>
+            <column name="description" type="TEXT"/>
+            <column name="display_order" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(100)"/>
+            <column name="code" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <!--faq_entry-->
+    <changeSet author="jme" id="001-update-schema-017">
+        <createTable tableName="faq_entry">
+            <column autoIncrement="true" name="id" type="BIGINT" startWith="10000">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="faq_entryPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="archived" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="published" defaultValueBoolean="false" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="question" type="TEXT"/>
+            <column name="answer" type="TEXT"/>
+            <column name="tags" type="JSONB"/>
+            <column name="metadata" type="JSONB"/>
+            <column name="display_order" type="INTEGER"/>
+            <column name="category" type="BIGINT">
+                <constraints foreignKeyName="fk_faq_category_faq_entry" references="faq_category(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="sfy" id="001-update-schema-014">
+        <createTable tableName="ticket_status_history">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ticket_status_historyPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment" type="TEXT" remarks="Optional comment explaining the status change"/>
+            <column name="new_status" type="VARCHAR(20)" remarks="Status after the change"/>
+            <column name="old_status" type="VARCHAR(20)" remarks="Status before the change"/>
+            <column name="time_in_old_status" type="numeric(21, 0)"
+                    remarks="Time spent in the previous status (duration)"/>
+            <column name="ticket" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="fk_ticket_status_history" references="ticket(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Gestion VERSION -->
+
+    <!-- version -->
+    <changeSet author="sfy" id="002-update-schema-015">
+        <createTable tableName="version"
+                     remarks="Represents a specific application version (mobile or web) used for managing release lifecycle and compatibility.">
+            <column name="id" type="VARCHAR(36)" remarks="Unique identifier of the version.">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="versionPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deprecation_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"
+                    remarks="Date when this version was deprecated."/>
+            <column name="description" type="TEXT" remarks="Detailed description of the version."/>
+            <column name="download_url" type="VARCHAR(255)"
+                    remarks="URL where the application package can be downloaded."/>
+            <column defaultValueBoolean="false" name="is_critical" type="BOOLEAN"
+                    remarks="Indicates if the update is critical.">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="is_forced" type="BOOLEAN"
+                    remarks="Indicates if the update is mandatory for users.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="minimumosversion" type="VARCHAR(20)"
+                    remarks="Minimum OS version required to install this release."/>
+            <column name="package_size" type="BIGINT" remarks="Size of the downloadable package in bytes."/>
+            <column name="platform" type="VARCHAR(10)"
+                    remarks="Target platform for this release (e.g., ANDROID, IOS, WEB).">
+                <constraints nullable="false"/>
+            </column>
+            <column name="release_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"
+                    remarks="Date when the version was officially released."/>
+            <column name="status" type="VARCHAR(20)"
+                    remarks="Lifecycle status of the version (DRAFT, ACTIVE, DEPRECATED, ARCHIVED).">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(60)" remarks="Short title describing the version.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(10)" remarks="Version type (MAJOR, MINOR, PATCH, HOTFIX).">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version_number" type="VARCHAR(30)"
+                    remarks="Semantic version number (e.g., 1.0.0 or 1.2.3-android).">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="archived" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint
+                tableName="version"
+                columnNames="version_number, platform"
+                constraintName="uk_version_number_platform"/>
+    </changeSet>
+
+    <!-- version_aud -->
+    <changeSet author="sfy" id="002-update-schema-016">
+        <createTable tableName="version_aud">
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_contact_aud_rev" references="revinfo(id)"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="revend" type="BIGINT">
+                <constraints nullable="true" foreignKeyName="fk_contact_aud_revend" references="revinfo(id)"/>
+            </column>
+            <column name="revend_timestamp" type="TIMESTAMP"/>
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deprecation_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="description" type="TEXT"/>
+            <column name="download_url" type="VARCHAR(255)"/>
+            <column defaultValueBoolean="false" name="is_critical" type="BOOLEAN"/>
+            <column defaultValueBoolean="false" name="is_forced" type="BOOLEAN"/>
+            <column name="minimumosversion" type="VARCHAR(20)"/>
+            <column name="package_size" type="BIGINT"/>
+            <column name="platform" type="VARCHAR(10)"/>
+            <column name="release_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="status" type="VARCHAR(20)"/>
+            <column name="title" type="VARCHAR(60)"/>
+            <column name="type" type="VARCHAR(10)"/>
+            <column name="archived" type="BOOLEAN"/>
+            <column name="version_number" type="VARCHAR(30)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- user_device -->
+    <changeSet author="sfy" id="002-update-schema-017">
+        <createTable tableName="user_device">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_devicePK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_version" type="VARCHAR(30)"
+                    remarks="Application version currently installed on the device.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="device" type="VARCHAR(100)" remarks="Unique identifier or name of the device.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="device_type" type="SMALLINT" remarks="Type of device (e.g., ANDROID, IOS, WEB).">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN"
+                    remarks="Indicates whether the device is currently active.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_sync_at" type="TIMESTAMP(6) WITHOUT TIME ZONE"
+                    remarks="Timestamp of the last synchronization with the system."/>
+            <column name="manufacturer" type="VARCHAR(60)" remarks="Device manufacturer (e.g., Apple, Samsung)."/>
+            <column name="model" type="VARCHAR(60)" remarks="Device model name (e.g., iPhone 14, Galaxy S22)."/>
+            <column name="os_type" type="SMALLINT" remarks="Operating system type (ANDROID, IOS, WINDOWS, etc.).">
+                <constraints nullable="false"/>
+            </column>
+            <column name="os_version" type="VARCHAR(60)"
+                    remarks="Version of the operating system running on the device.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="_user" type="VARCHAR(36)"
+                    remarks="Reference to the user (contact) associated with this device.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="current_version" type="VARCHAR(36)"
+                    remarks="Reference to the current application version installed.">
+                <constraints nullable="false" foreignKeyName="fk_current_version_user_device" references="version(id)"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint
+                tableName="user_device"
+                columnNames="_user, device"
+                constraintName="uk_user_device"/>
+    </changeSet>
+
+    <!-- user_device_aud -->
+    <changeSet author="sfy" id="002-update-schema-018">
+        <createTable tableName="user_device_aud">
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_contact_aud_rev" references="revinfo(id)"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="revend" type="BIGINT">
+                <constraints nullable="true" foreignKeyName="fk_contact_aud_revend" references="revinfo(id)"/>
+            </column>
+            <column name="revend_timestamp" type="TIMESTAMP"/>
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_version" type="VARCHAR(30)"/>
+            <column name="device" type="VARCHAR(100)"/>
+            <column name="device_type" type="SMALLINT"/>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN"/>
+            <column name="last_sync_at" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="manufacturer" type="VARCHAR(60)"/>
+            <column name="model" type="VARCHAR(60)"/>
+            <column name="os_type" type="SMALLINT"/>
+            <column name="os_version" type="VARCHAR(60)"/>
+            <column name="_user" type="VARCHAR(36)"/>
+            <column name="current_version" type="VARCHAR(36)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- changelog_entry -->
+    <changeSet author="sfy" id="002-update-schema-019">
+        <createTable tableName="changelog_entry">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="changelog_entryPK"/>
+            </column>
+            <column defaultValue="system" name="created_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="system" name="last_modified_by" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="VARCHAR(100)" remarks="Name of the author or contributor of the change."/>
+            <column name="description" type="TEXT" remarks="Detailed explanation of the change."/>
+            <column name="display_order" type="INTEGER" remarks="Custom order used for displaying changelog entries."/>
+            <column name="title" type="VARCHAR(60)" remarks="Short title describing the change.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="SMALLINT" remarks="Type of change (NEW_FEATURE, BUG_FIX, IMPROVEMENT, etc.).">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="VARCHAR(36)" remarks="Reference to the version this change belongs to.">
+                <constraints nullable="false" foreignKeyName="fk_version_changelog_entry" references="version(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

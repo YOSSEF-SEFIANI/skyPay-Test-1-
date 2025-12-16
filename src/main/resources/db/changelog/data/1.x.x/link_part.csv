@@ -1,0 +1,9 @@
+id,code,value,description,display_order,company
+1,PARENT,Parent,Parent link part,1,NULL
+2,CHILD,Child,Child link part,2,NULL
+3,RELATED,Related,Related link part,3,NULL
+4,PREDECESSOR,Predecessor,Predecessor link part,4,NULL
+5,SUCCESSOR,Successor,Successor link part,5,NULL
+6,DUPLICATE,Duplicate,Duplicate link part,6,NULL
+7,BLOCKS,Blocks,Blocks link part,7,NULL
+8,BLOCKED_BY,Blocked by,Blocked by link part,8,NULL

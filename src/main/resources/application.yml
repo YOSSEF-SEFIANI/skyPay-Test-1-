@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: skypay
+  cloud:
+    config:
+      enabled: false
+  liquibase:
+    enabled: false
+  jpa:
+    open-in-view: false
+

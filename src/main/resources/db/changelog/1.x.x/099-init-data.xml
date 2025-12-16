@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="099-init-data-001" author="jme" runOnChange="true">
+        <loadUpdateData tableName="category" file="../data/1.x.x/category.csv" primaryKey="id"
+                        relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="099-init-data-002" author="jme" runOnChange="true">
+        <loadUpdateData tableName="ticket_type" file="../data/1.x.x/ticket_type.csv" primaryKey="id"
+                        relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="099-init-data-003" author="jme" runOnChange="true">
+        <loadUpdateData tableName="channel" file="../data/1.x.x/channel.csv" primaryKey="id"
+                        relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="099-init-data-004" author="jme" runOnChange="true">
+        <loadUpdateData tableName="link_part" file="../data/1.x.x/link_part.csv" primaryKey="id"
+                        relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="099-init-data-005" author="jme" runOnChange="true">
+        <loadUpdateData tableName="link_type" file="../data/1.x.x/link_type.csv" primaryKey="id"
+                        relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="099-init-data-006" author="jme" runOnChange="true">
+        <loadUpdateData tableName="device" file="../data/1.x.x/device.csv" primaryKey="id"
+                        relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>
