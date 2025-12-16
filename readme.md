@@ -35,7 +35,6 @@ Développé dans le cadre du test technique Skypay, ce projet démontre la maît
 
 ```bash
 # Cloner
-git clone https://github.com/votre-repo/skypay-banking. git
 cd skypay-banking
 
 # Compiler
@@ -65,8 +64,8 @@ mvn spring-boot:run
 ## 🏗️ Architecture
 
 ```
-src/main/java/com/skypay/bank/
-├── domain/
+src/main/java/com/skypay/banking/
+├── model/
 │   ├── Account.java           # Entité compte
 │   └── Transaction.java       # Record transaction (Java 21)
 ├── service/
@@ -74,9 +73,8 @@ src/main/java/com/skypay/bank/
 │   └── impl/
 │       └── AccountServiceImpl.java
 ├── exception/
-│   └── InsufficientFundsException. java
-└── config/
-    └── LocalDateConverter.java
+   └── InsufficientFundsException. java
+ 
 ```
 
 **Principes appliqués** :  SOLID, Clean Code, Domain-Driven Design
@@ -114,11 +112,6 @@ Date       || Amount || Balance
 # Tous les tests
 mvn test
 
-# Test spécifique
-mvn test -Dtest=AccountServiceTest#shouldMatchSpecification
-
-# Avec rapport de couverture
-mvn test jacoco:report
 ```
 
 **Résultat** :
@@ -148,55 +141,6 @@ mvn spring-boot:run
 # Vérifier les dépendances obsolètes
 mvn versions:display-dependency-updates
 ```
-
----
-
-## 📁 Structure du Projet
-
-```
-skypay/
-├── pom.xml
-├── README.md
-├── TESTS.md
-└── src/
-    ├── main/
-    │   ├── java/com/skypay/
-    │   │   ├── SkypayApplication.java
-    │   │   └── bank/
-    │   │       ├── model/
-    │   │       ├── service/
-    │   │       └── exception/
-    │   └── resources/
-    │       └── application.properties
-    └── test/
-        └── java/com/skypay/bank/
-            └── service/
-                └── AccountServiceTest.java
-```
-
----
-
-## ✨ Points Forts
-
-| Aspect | Implémentation |
-|--------|----------------|
-| **Java 21** | Records, Pattern Matching ready |
-| **Tests** | TDD avec JUnit 5 + AssertJ |
-| **Clean Code** | SOLID, DRY, nommage explicite |
-| **Architecture** | Separation of Concerns |
-| **Sécurité** | Validation, CVE corrigés |
-| **Documentation** | Complète et claire |
-
----
-
-## 🚀 Améliorations Futures
-
-- [ ] Persistance JPA/Hibernate
-- [ ] API REST avec Spring Web
-- [ ] Multi-comptes utilisateur
-- [ ] Authentification OAuth2
-- [ ] Audit trail
-- [ ] Monitoring (Actuator, Prometheus)
 
 ---
 
@@ -230,7 +174,6 @@ Ce projet démontre :
 ✅ Application des **principes SOLID**  
 ✅ Code **clean, testé et documenté**
 
-**BUILD SUCCESS** 🚀
 
 ---
 
