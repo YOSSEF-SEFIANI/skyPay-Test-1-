@@ -1,7 +1,0 @@
-id,code,value,description,display_order,company
-1,APP,Application,Ticket created via mobile or desktop application,1,NULL
-2,WEB,Website,Ticket created via website,2,NULL
-3,EMAIL,Email,Ticket created via email,3,NULL
-4,PHONE,Phone,Ticket created via phone call,4,NULL
-5,CHAT,Chat,Ticket created via chat support,5,NULL
-6,SOCIAL,Social Media,Ticket created via social media,6,NULL

@@ -1,5 +1,0 @@
-id,code,value,description,display_order,resolution_time,assignment_time,company
-1,SR,Support Request,This is a support request,1,86400,3600,NULL
-2,UR,User Report,This is a user report,2,172800,7200,NULL
-3,ER,Event Report,This is an event report,3,259200,10800,NULL
-4,CR,Complaint Report,This is a complaint report,4,432000,14400,NULL
